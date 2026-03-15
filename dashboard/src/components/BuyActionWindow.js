@@ -7,13 +7,15 @@ import GeneralContext from "./GeneralContext";
 
 import "./BuyActionWindow.css";
 
+const BASE_URL = process.env.BACKEND_URL || "http://localhost:3002";
+
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
   const generalContext = useContext(GeneralContext);
 
   const handleBuyClick = () => {
-    axios.post("http://localhost:3002/newOrder", {
+    axios.post(`${BASE_URL}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,

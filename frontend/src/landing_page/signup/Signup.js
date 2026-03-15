@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Signup.css";
 
+const BASE_URL = process.env.BACKEND_URL || "http://localhost:3002";
+
 function Signup() {
   const [formData, setFormData] = useState({
     username: "",
@@ -22,7 +24,7 @@ function Signup() {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:3002/signup", formData);
+      await axios.post(`${BASE_URL}/signup`, formData);
       setSuccess(true);
     } catch (err) {
       const msg =

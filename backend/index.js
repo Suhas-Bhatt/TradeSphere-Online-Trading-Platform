@@ -12,10 +12,29 @@ const {UserModel} = require('./model/UserModel');
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL;
+const DASHBOARD_URL= process.env.DASHBOARD_URL;
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = [
+  FRONTEND_URL,
+  DASHBOARD_URL
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true
+  })
+);
+
 app.use(bodyParser.json());
 
 app.post("/signup", async (req, res) => {
