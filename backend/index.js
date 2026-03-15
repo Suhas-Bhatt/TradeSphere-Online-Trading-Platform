@@ -8,6 +8,7 @@ const cors = require("cors");
 const {HoldingsModel} = require('./model/HoldingsModel');
 const {PositionsModel} = require('./model/PositionsModel');
 const {OrdersModel} = require('./model/OrdersModel');
+const {UserModel} = require('./model/UserModel');
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -16,6 +17,21 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.post("/signup", async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const newUser = new UserModel({ username, email });
+    await UserModel.register(newUser, password);
+    res.status(201).json({ message: "User registered successfully!" });
+  } catch (err) {
+    if (err.name === "UserExistsError" || err.code === 11000) {
+      res.status(409).json({ message: "A user with this email already exists." });
+    } else {
+      res.status(500).json({ message: err.message || "Something went wrong." });
+    }
+  }
+});
 
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [

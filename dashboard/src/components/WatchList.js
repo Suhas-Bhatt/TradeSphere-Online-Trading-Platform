@@ -134,8 +134,12 @@ const WatchListActions = ({ uid }) => {
     generalContext.openBuyWindow(uid);
   };
 
+  const handleSellClick = () => {
+    generalContext.openSellWindow(uid);
+  };
+
   return (
-    <span className="actions">
+    <span className="actions d-flex align-items-center justify-content-end">
       <span>
         <Tooltip
           title="Buy (B)"
@@ -144,15 +148,16 @@ const WatchListActions = ({ uid }) => {
           TransitionComponent={Grow}
           onClick={handleBuyClick}
         >
-          <button className="buy">Buy</button>
+          <button className="buy btn btn-sm btn-primary">Buy</button>
         </Tooltip>
         <Tooltip
           title="Sell (S)"
           placement="top"
           arrow
           TransitionComponent={Grow}
+          onClick={handleSellClick}
         >
-          <button className="sell">Sell</button>
+          <button className="sell btn btn-sm btn-danger mx-1">Sell</button>
         </Tooltip>
         <Tooltip
           title="Analytics (A)"
@@ -160,13 +165,13 @@ const WatchListActions = ({ uid }) => {
           arrow
           TransitionComponent={Grow}
         >
-          <button className="action">
-            <BarChartOutlined className="icon" />
+          <button className="action btn btn-sm btn-outline-secondary">
+            <i className="fa fa-bar-chart" aria-hidden="true"></i>
           </button>
         </Tooltip>
         <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
-          <button className="action">
-            <MoreHoriz className="icon" />
+          <button className="action btn btn-sm btn-outline-secondary mx-1">
+            <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
           </button>
         </Tooltip>
       </span>

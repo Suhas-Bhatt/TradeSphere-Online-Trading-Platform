@@ -736,17 +736,25 @@ hr {
 .buy {
   background-color: #4184f3;
   color: #fff;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.8rem;
   border: 0.7px solid #4184f3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
 }
 
 .sell {
   background-color: #ff5722;
   color: #fff;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.8rem;
   border: 0.7px solid #ff5722;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
 }
 
 .action {
@@ -797,24 +805,13 @@ hr {
   color: rgb(103, 201, 136);
 }
 
-.settings {
-  transform: scale(0.8);
-  color: rgb(105, 105, 105);
-}
-
-/* sudo selectors */
-.search:focus {
-  outline: none;
-}
-
 .list li:hover {
-  cursor: move;
+  cursor: pointer;
   background-color: #f3f3f3;
 }
 
 .list li:hover > .actions {
   display: flex;
-  cursor: move;
 }
 
 /* TODO */
@@ -840,4 +837,78 @@ hr {
 
 .action:hover {
   background-color: rgb(212, 212, 212);
+}
+
+/* ── Overlays (Buy/Sell) ────────────────────────── */
+#buy-window, #sell-window {
+  z-index: 9999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border-radius: 8px;
+}
+
+/* ── Custom UI Enhancements ────────────────────── */
+.app-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.app-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  border-color: #387ed1;
+}
+
+.app-icon i {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .app-icon i {
+  transform: scale(1.1);
+}
+
+.order-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.order-table tr {
+  transition: background-color 0.2s ease;
+}
+
+/* ── Global Responsiveness (Bootstrap Supplements) ── */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .watchlist-container {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  
+  #buy-window, #sell-window {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+
+/* ── Premium UI Enhancements ────────────────────── */
+.order-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.order-table tr {
+  transition: background-color 0.2s ease;
 }
